@@ -1,8 +1,14 @@
+import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function Movie() {
+export default function Movie(
+  {
+    _id,
+  }
+) {
+  
   const [redirect, setRedirect] = useState(false);
 
   const router = useRouter();
@@ -38,6 +44,61 @@ export default function Movie() {
     "4K": false,
   });
   const [status, setStatus] = useState("");
+
+  //function for create movie
+  async function createMovie(ev) {
+    ev.preventDefault();
+
+    const data = { 
+      title,
+      slug,
+      bgPoster,
+      smPoster,
+      titlecategory,
+      description,
+      rating,
+      duration,
+      year,
+      genre,
+      language,
+      subtitle,
+      size,
+      quality,
+      youtubelink,
+      category,
+      watchonline,
+      downloadlink,
+      status, 
+    }
+
+      // if (_id) {
+      //   await axios.put('/api/getmovies', {...data, _id})
+      // } else {
+      //   await axios.post('/api/getmovies', data);
+      // }
+
+      // setRedirect(true);
+
+      try {
+        if (_id) {
+          await axios.put('/api/getmovies', { ...data, _id });
+        } else {
+          await axios.post('/api/getmovies', data);
+        }
+        setRedirect(false);
+      } catch (error) {
+        console.error("An error occurred while making the request:", error);
+        // You can also handle the error here (e.g., show an error message to the user)
+      }
+      
+  }
+
+  if (redirect) {
+    router.push('/')
+    return null;
+    
+  }
+    
 
   //Download link functions
 
@@ -84,7 +145,27 @@ export default function Movie() {
         <title>Add Movie page</title>
       </Head>
 
-      <form className="addmovieform">
+      <form className="addmovieform" onSubmit={createMovie}>
+        {/* preview bgposter and smposter image */}
+        <div className="w-100 flex gap-3 mt-1">
+          {bgPoster ? (
+            <div className="bgposter flex flex-col w-70 flex-left">
+              <img src={bgPoster} id="prv" alt="image" />
+              <label htmlFor="prv" className="w-100">
+                Background image preview
+              </label>
+            </div>
+          ) : null}
+          {smPoster ? (
+            <div className="smposter flex flex-col w-33 flex-left">
+              <img src={smPoster} id="prv" alt="image" />
+              <label htmlFor="prv" className="w-100">
+                Smposter preview
+              </label>
+            </div>
+          ) : null}
+        </div>
+
         <div className="formdata w-100 flex flex-sb mt-3 flex-left">
           <div className="w-50 flex flex-col flex-left">
             {/* Movie background image */}
@@ -439,21 +520,38 @@ export default function Movie() {
               <div className="moviecategory flex flex-sb flex-left">
                 <div className="w-50 flex flex-col flex-left mb-2">
                   <label>Movie Genre :</label>
-                  {['Action', 'Adventure', 'Animation', 'Comedy', 'Drama', 'Crime', 'Fantasy', 'Horror', 'Romance', 'Thriller', 'Science_Fiction'].map((genreOption) => (
+                  {[
+                    "Action",
+                    "Adventure",
+                    "Animation",
+                    "Comedy",
+                    "Drama",
+                    "Crime",
+                    "Fantasy",
+                    "Horror",
+                    "Romance",
+                    "Thriller",
+                    "Science_Fiction",
+                  ].map((genreOption) => (
                     <label key={genreOption} className="flex gap-05">
-                      <input type="checkbox"
-                             value={genreOption.toLocaleLowerCase()}
-                             checked={genre.includes(genreOption.toLocaleLowerCase())}
-                             onChange={(e) => {
-                              const selectedGenre = e.target.value;
-                              setGenre((preGenre) => {
-                                if (preGenre.includes(selectedGenre)) {
-                                  return preGenre.filter((genre) => genre !== selectedGenre);
-                                } else {
-                                  return [...preGenre, selectedGenre];
-                                }
-                              })
-                             }}
+                      <input
+                        type="checkbox"
+                        value={genreOption.toLocaleLowerCase()}
+                        checked={genre.includes(
+                          genreOption.toLocaleLowerCase()
+                        )}
+                        onChange={(e) => {
+                          const selectedGenre = e.target.value;
+                          setGenre((preGenre) => {
+                            if (preGenre.includes(selectedGenre)) {
+                              return preGenre.filter(
+                                (genre) => genre !== selectedGenre
+                              );
+                            } else {
+                              return [...preGenre, selectedGenre];
+                            }
+                          });
+                        }}
                       />
                       {genreOption}
                     </label>
@@ -465,7 +563,11 @@ export default function Movie() {
         </div>
 
         {/* for save all data in mongoDB for submit button */}
-        
+        <div className="w-100 mb-2">
+          <button type="sbmit" className="w-100 flex-center">
+            SAVE DATA
+          </button>
+        </div>
       </form>
     </>
   );
