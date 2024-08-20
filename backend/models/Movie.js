@@ -1,4 +1,5 @@
-const { Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema, model, models } = mongoose;
 
 // create a model for the database
 const MovieSchema = new Schema(
@@ -33,4 +34,5 @@ const MovieSchema = new Schema(
   }
 );
 
-export const Movie = models.Movie || model("Movie", MovieSchema, "movies");
+const Movie = models.Movie || model('Movie', MovieSchema, 'movies');
+module.exports = Movie;

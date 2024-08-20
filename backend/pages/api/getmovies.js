@@ -1,5 +1,6 @@
 import { mongooseConnect } from "@/lib/mongoose";
-import { Movie } from "@/models/Movie";
+import Movie from "@/models/Movie";
+// import Movie from "../../models/Movie";
 
 //api for fetching data from mongodb databse
 export default async function handle(req, res) {
@@ -31,6 +32,9 @@ export default async function handle(req, res) {
       downloadlink,
       status,
     } = req.body;
+
+    console.log("---------Movie------------")
+    console.log(Movie)
 
     const movieData = await Movie.create({
       title,
