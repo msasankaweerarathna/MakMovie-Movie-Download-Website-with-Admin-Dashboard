@@ -1,9 +1,7 @@
-const mongoose = require('mongoose');
-const { Schema, model, models } = mongoose;
+const { Schema, model } = require("mongoose");
 
-// create a model for the database
-const MovieSchema = new Schema(
-  {
+
+const MovieSchema = new Schema ({
     title: { type: String },
     slug: { type: String, require: true },
     bgPoster: { type: String },
@@ -28,11 +26,8 @@ const MovieSchema = new Schema(
       "4K": { type: String },
     },
     status: { type: String },
-  },
-  {
-    timestamps: true, //this option will auto createdAT and UpdatedAt fields
-  }
-);
+},{
+  timestamps: true,
+});
 
-const Movie = models.Movie || model('Movie', MovieSchema, 'movies');
-module.exports = Movie;
+export const Movie = models.Movie || model('Movie', MovieSchema, 'movies');
