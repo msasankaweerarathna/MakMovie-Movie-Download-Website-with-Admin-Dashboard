@@ -21,3 +21,5 @@ if (process.env.NODE_ENV === "development") {
     Client = new MongoClient(uri, option)
     ClientPromise = Client.connect()
 }
+
+export default ClientPromise
