@@ -85,7 +85,7 @@ export default function Movie(
         } else {
           await axios.post('/api/getmovies', data);
         }
-        setRedirect(false);
+        setRedirect(true);
       } catch (error) {
         console.error("An error occurred while making the request:", error);
         // You can also handle the error here (e.g., show an error message to the user)
