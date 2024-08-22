@@ -30,4 +30,4 @@ const MovieSchema = new Schema ({
   timestamps: true,
 });
 
-export const Movie = models.Movie || model('Movie', MovieSchema, 'movies');
+export const Movie = model.Movie || model('Movie', MovieSchema, 'movies');
