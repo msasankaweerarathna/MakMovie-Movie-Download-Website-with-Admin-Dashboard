@@ -34,6 +34,42 @@ function useFectchData(apiEndpoint) {
       fetchAllData(); //call this function if api exist
     }
   }, [initialLoad, apiEndpoint]); //depend on ini and apiEndpoint to trigger api call
+
+  return { alldata, loading };
 }
 
 export default useFectchData;
+
+// =============================================
+
+// import axios from "axios";
+// import { useEffect, useState } from "react";
+
+// function useFetchData(apiEndpoint) {
+//   const [alldata, setAllData] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchAllData = async () => {
+//       try {
+//         setLoading(true); // Ensure loading is set to true when data fetching begins
+//         const res = await axios.get(apiEndpoint);
+//         const allData = res.data;
+//         setAllData(allData);
+//       } catch (error) {
+//         console.error("Error fetching movie data:", error);
+//       } finally {
+//         setLoading(false); // Set loading to false after data is fetched or an error occurs
+//       }
+//     };
+
+//     if (apiEndpoint) {
+//       fetchAllData();
+//     }
+//   }, [apiEndpoint]);
+
+//   return { alldata, loading };
+// }
+
+// export default useFetchData;
+
