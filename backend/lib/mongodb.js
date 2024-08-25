@@ -6,20 +6,20 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI
-const option = {}
+const options = {}
 
-let Client
+let client
 let ClientPromise 
 
 if (process.env.NODE_ENV === "development") {
     if (!global._mongoClientPromise) {
-        Client = new MongoClient(uri, option)
-        global._mongoClientPromise = Client.connect()
+        client = new MongoClient(uri, options)
+        global._mongoClientPromise = client.connect()
     }
     ClientPromise = global._mongoClientPromise
 } else {
-    Client = new MongoClient(uri, option)
-    ClientPromise = Client.connect()
+    client = new MongoClient(uri, options)
+    ClientPromise = client.connect()
 }
 
 export default ClientPromise
