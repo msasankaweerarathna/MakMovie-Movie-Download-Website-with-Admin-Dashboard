@@ -8,68 +8,35 @@ function useFectchData(apiEndpoint) {
 
   useEffect(() => {
     if (initialLoad) {
-      //set initialLoad to false to prevent the ap[i call on subsequent renders
+      //set initialLoad to false to prevent the api call on subsequent renders
       setInitialLoad(false);
       setLoading(false);
       return; //exit useEffect
     }
 
-    //set loading to tru to indicate data fetching
+    //set loading to true to indicate data fetching
     setLoading(true);
 
     const fetchAllData = async () => {
       try {
-        const res = await axios.get(apiEndpoint);
-        const allData = res.data;
-        setAllData(allData);
-        setLoading(false); //set loading state to false after data is fetch
+        const res = await axios.get(apiEndpoint)
+        const alldata = res.data;
+        setAllData(alldata);
+        setLoading(false);//set loading state to false after data is fetched
       } catch (error) {
         console.error("error fetching movie data:", error);
-        setLoading(false); //set loading state to false even if there is an error
+        setLoading(false); //set loading state false even if there's and error 
       }
     };
 
     //fetch movie data only if category exits
     if (apiEndpoint) {
-      fetchAllData(); //call this function if api exist
+      fetchAllData(); //call this function if api exists
     }
-  }, [initialLoad, apiEndpoint]); //depend on ini and apiEndpoint to trigger api call
+
+  }, [initialLoad, apiEndpoint]); //depend on ini and apiendpoint to trigger api call
 
   return { alldata, loading };
 }
 
 export default useFectchData;
-
-// =============================================
-
-// import axios from "axios";
-// import { useEffect, useState } from "react";
-
-// function useFetchData(apiEndpoint) {
-//   const [alldata, setAllData] = useState([]);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchAllData = async () => {
-//       try {
-//         setLoading(true); // Ensure loading is set to true when data fetching begins
-//         const res = await axios.get(apiEndpoint);
-//         const allData = res.data;
-//         setAllData(allData);
-//       } catch (error) {
-//         console.error("Error fetching movie data:", error);
-//       } finally {
-//         setLoading(false); // Set loading to false after data is fetched or an error occurs
-//       }
-//     };
-
-//     if (apiEndpoint) {
-//       fetchAllData();
-//     }
-//   }, [apiEndpoint]);
-
-//   return { alldata, loading };
-// }
-
-// export default useFetchData;
-
