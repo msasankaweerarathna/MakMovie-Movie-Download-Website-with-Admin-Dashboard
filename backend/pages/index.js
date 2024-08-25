@@ -9,14 +9,13 @@ import { TbCategoryPlus } from "react-icons/tb";
 import { RiMovie2Line } from "react-icons/ri";
 import { RiDraftLine } from "react-icons/ri";
 import Spinner from "@/components/Spinner";
-import Loading from "@/components/Loading";
 
 
 export default function Home() {
   const { alldata, loading } = useFectchData("/api/getmovies");
 
-  const publishedMovies = alldata.filter((ab) => ab.status === "publish");
-  const draftMovies = alldata.filter((ab) => ab.status === "draft");
+  const publishedMovies = alldata.filter(ab => ab.status === "publish");
+  const draftMovies = alldata.filter(ab => ab.status === "draft");
 
   const router = useRouter();
   return (
@@ -112,8 +111,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          <div className="Moviecards flex flex-col flex-left gap-2 w-100">
+          
+          <div className="moviecards flex flex-col flex-left gap-2 w-100">
             <div className="flex flex-sb w-100 movietitle">
               <h2>List Of Latest Movies</h2>
               <Link href='/addmovie'><button>Add Movie</button></Link>
@@ -122,12 +121,16 @@ export default function Home() {
               {publishedMovies.slice(0,3).map((movie) => {
                 return <div className="moviecard" key={movie._id}>
                   <img src={movie.bgposter || "/img/noimage.jpg"} alt="movie" />
+                  <div className="moviecardinfo">
+                    <div>
+                      <h3>{movie.slug}</h3>
+                    </div>
+                  </div>
                 </div>
-              })}     
+              })}
             </>}
           </div>
-        </div>
-      )}
+        </div>)}
     </>
   );
 }

@@ -77,7 +77,7 @@ export default function Movie(
       //   await axios.post('/api/getmovies', data);
       // }
 
-      // setRedirect(true);
+      setRedirect(true);
 
       try {
         if (_id) {

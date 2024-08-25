@@ -1,4 +1,3 @@
-
 import { mongooseConnect } from "@/lib/mongoose";
 import { Movie } from "@/models/Movie";
 
@@ -8,14 +7,14 @@ export default async function handle(req, res) {
   await mongooseConnect();
 
   const { method } = req;
-  
+
   //when post req
   if (method === "POST") {
     const {
       title,
       slug,
-      bgPoster,
-      smPoster,
+      bgposter,
+      smposter,
       titlecategory,
       description,
       rating,
@@ -36,8 +35,8 @@ export default async function handle(req, res) {
     const movieData = await Movie.create({
       title,
       slug,
-      bgPoster,
-      smPoster,
+      bgposter,
+      smposter,
       titlecategory,
       description,
       rating,
@@ -53,11 +52,11 @@ export default async function handle(req, res) {
       watchonline,
       downloadlink,
       status
-    })
+    });
 
     res.json(movieData)
   }
-  
+
   //when get req
   if (method === 'GET') {
     if (req.query?.id) {
@@ -70,8 +69,7 @@ export default async function handle(req, res) {
   //when update req
   if (method === 'PUT') {
     const {
-      //when update the add _id to find movie
-      _id,
+      _id, //when update the add _id to find movie
       title,
       slug,
       bgPoster,
@@ -93,27 +91,30 @@ export default async function handle(req, res) {
       status
     } = req.body;
 
-    await Movie.updateOne({_id}, {
-      title,
-      slug,
-      bgPoster,
-      smPoster,
-      titlecategory,
-      description,
-      rating,
-      duration,
-      year,
-      genre,
-      language,
-      subtitle,
-      size,
-      quality,
-      youtubelink,
-      category,
-      watchonline,
-      downloadlink,
-      status
-    });
+    await Movie.updateOne(
+      { _id },
+      {
+        title,
+        slug,
+        bgPoster,
+        smPoster,
+        titlecategory,
+        description,
+        rating,
+        duration,
+        year,
+        genre,
+        language,
+        subtitle,
+        size,
+        quality,
+        youtubelink,
+        category,
+        watchonline,
+        downloadlink,
+        status
+      }
+    );
 
     res.json(true);
   }
@@ -121,7 +122,7 @@ export default async function handle(req, res) {
   //when delete req
   if (method === 'DELETE') {
     if (req.query?.id) {
-      await Movie.deleteOne({_id: req.query?.id});
+      await Movie.deleteOne({ _id: req.query?.id });
       res.json(true);
     }
   }
