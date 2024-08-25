@@ -1,11 +1,12 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, models } = require("mongoose");
 
-
-const MovieSchema = new Schema ({
+//database model for database
+const MovieSchema = new Schema(
+  {
     title: { type: String },
-    slug: { type: String, require: true },
-    bgPoster: { type: String },
-    smPoster: { type: String },
+    slug: { type: String, required: true },
+    bgposter: { type: String },
+    smposter: { type: String },
     titlecategory: { type: String },
     description: { type: String },
     rating: { type: String },
@@ -26,8 +27,10 @@ const MovieSchema = new Schema ({
       "4K": { type: String },
     },
     status: { type: String },
-},{
-  timestamps: true,
-});
+  },
+  {
+    timestamps: true, //this option will auto manage createAt and UpdateAt fields
+  }
+);
 
-export const Movie = model.Movie || model('Movie', MovieSchema, 'movies');
+export const Movie = models.Movie || model('Movie', MovieSchema, 'movies');
