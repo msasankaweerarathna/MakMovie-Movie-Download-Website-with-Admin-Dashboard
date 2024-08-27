@@ -3,20 +3,15 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function Movie(
-  {
-    _id,
-  }
-) {
-  
+export default function Movie({ _id }) {
   const [redirect, setRedirect] = useState(false);
 
   const router = useRouter();
 
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
-  const [bgPoster, setBgposter] = useState("");
-  const [smPoster, setSmposter] = useState("");
+  const [bgposter, setBgposter] = useState("");
+  const [smposter, setSmposter] = useState("");
   const [titlecategory, setTitlecategory] = useState("");
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState("");
@@ -37,7 +32,7 @@ export default function Movie(
     "4K": "",
   });
   //not use for database
-  const [showInputs, setShowInput] = useState({
+  const [showInputs, setShowInputs] = useState({
     "480p": false,
     "720p": false,
     "1080p": false,
@@ -49,11 +44,11 @@ export default function Movie(
   async function createMovie(ev) {
     ev.preventDefault();
 
-    const data = { 
+    const data = {
       title,
       slug,
-      bgPoster,
-      smPoster,
+      bgposter,
+      smposter,
       titlecategory,
       description,
       rating,
@@ -68,37 +63,34 @@ export default function Movie(
       category,
       watchonline,
       downloadlink,
-      status, 
-    }
+      status,
+    };
 
-      // if (_id) {
-      //   await axios.put('/api/getmovies', {...data, _id})
-      // } else {
-      //   await axios.post('/api/getmovies', data);
-      // }
+    // if (_id) {
+    //   await axios.put('/api/getmovies', {...data, _id})
+    // } else {
+    //   await axios.post('/api/getmovies', data);
+    // }
 
-      setRedirect(true);
+    //setRedirect(true);
 
-      try {
-        if (_id) {
-          await axios.put('/api/getmovies', { ...data, _id });
-        } else {
-          await axios.post('/api/getmovies', data);
-        }
-        setRedirect(true);
-      } catch (error) {
-        console.error("An error occurred while making the request:", error);
-        // You can also handle the error here (e.g., show an error message to the user)
+    try {
+      if (_id) {
+        await axios.put("/api/getmovies", { ...data, _id });
+      } else {
+        await axios.post("/api/getmovies", data);
       }
-      
+      setRedirect(true);
+    } catch (error) {
+      console.error("An error occurred while making the request:", error);
+      // You can also handle the error here (e.g., show an error message to the user)
+    }
   }
 
   if (redirect) {
-    router.push('/')
+    router.push("/");
     return null;
-    
   }
-    
 
   //Download link functions
 
@@ -112,7 +104,7 @@ export default function Movie(
   };
 
   const toggleInputVisibility = (resolution) => {
-    setShowInput((prevstate) => ({
+    setShowInputs((prevstate) => ({
       ...prevstate,
       [resolution]: !prevstate[resolution],
     }));
@@ -148,17 +140,17 @@ export default function Movie(
       <form className="addmovieform" onSubmit={createMovie}>
         {/* preview bgposter and smposter image */}
         <div className="w-100 flex gap-3 mt-1">
-          {bgPoster ? (
+          {bgposter ? (
             <div className="bgposter flex flex-col w-70 flex-left">
-              <img src={bgPoster} id="prv" alt="image" />
+              <img src={bgposter} id="prv" alt="image" />
               <label htmlFor="prv" className="w-100">
                 Background image preview
               </label>
             </div>
           ) : null}
-          {smPoster ? (
+          {smposter ? (
             <div className="smposter flex flex-col w-33 flex-left">
-              <img src={smPoster} id="prv" alt="image" />
+              <img src={smposter} id="prv" alt="image" />
               <label htmlFor="prv" className="w-100">
                 Smposter preview
               </label>
@@ -176,7 +168,7 @@ export default function Movie(
                   type="text"
                   id="bgposter"
                   placeholder="Bgposter image link"
-                  value={bgPoster}
+                  value={bgposter}
                   onChange={(ev) => setBgposter(ev.target.value)}
                 />
               </div>
@@ -365,7 +357,7 @@ export default function Movie(
                 type="text"
                 id="smposter"
                 placeholder="smposter image link"
-                value={smPoster}
+                value={smposter}
                 onChange={(e) => setSmposter(e.target.value)}
               />
             </div>
