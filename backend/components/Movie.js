@@ -63,16 +63,8 @@ export default function Movie({ _id }) {
       category,
       watchonline,
       downloadlink,
-      status,
+      status
     };
-
-    // if (_id) {
-    //   await axios.put('/api/getmovies', {...data, _id})
-    // } else {
-    //   await axios.post('/api/getmovies', data);
-    // }
-
-    //setRedirect(true);
 
     try {
       if (_id) {
@@ -83,7 +75,6 @@ export default function Movie({ _id }) {
       setRedirect(true);
     } catch (error) {
       console.error("An error occurred while making the request:", error);
-      // You can also handle the error here (e.g., show an error message to the user)
     }
   }
 
@@ -93,8 +84,7 @@ export default function Movie({ _id }) {
   }
 
   //Download link functions
-
-  const resolutions = ["480p", "720p", "1080p", "4k"];
+  const resolutions = ["480p", "720p", "1080p", "4K"];
 
   const handleInputChange = (resolution, value) => {
     setDownloadlink((prevstate) => ({
