@@ -2,14 +2,14 @@ import useFectchData from "@/hooks/useFetchData";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Spinner from "@/components/Spinner";
+import Loading from "@/components/Loading";
 //Import icons
 import { BiSolidMoviePlay } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { TbCategoryPlus } from "react-icons/tb";
 import { RiMovie2Line } from "react-icons/ri";
 import { RiDraftLine } from "react-icons/ri";
-import Spinner from "@/components/Spinner";
-import Loading from "@/components/Loading";
 import { FcRating } from "react-icons/fc";
 
 
