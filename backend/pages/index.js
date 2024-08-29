@@ -9,6 +9,8 @@ import { TbCategoryPlus } from "react-icons/tb";
 import { RiMovie2Line } from "react-icons/ri";
 import { RiDraftLine } from "react-icons/ri";
 import Spinner from "@/components/Spinner";
+import Loading from "@/components/Loading";
+import { FcRating } from "react-icons/fc";
 
 
 export default function Home() {
@@ -28,7 +30,7 @@ export default function Home() {
       </Head>
 
       {loading ? (
-        <loading />
+        <Loading />
       ) : (
         <div className="container">
           <div className="topheadertitle flex flex-sb">
@@ -60,7 +62,6 @@ export default function Home() {
               </div>
               <div className="flex flex-sb wh-100">
                 <img src="/img/chartone.svg" alt="chart" />
-                {/* bug-line65 */}
                 <h4>{publishedMovies.length}</h4>
               </div>
             </div>
@@ -106,7 +107,6 @@ export default function Home() {
               </div>
               <div className="flex flex-sb wh-100">
                 <img src="/img/chartfour.svg" alt="chart" />
-                {/* bug-line110 */}
                 <h4>{draftMovies.length}</h4>
               </div>
             </div>
@@ -124,11 +124,21 @@ export default function Home() {
                   <div className="moviecardinfo">
                     <div>
                       <h3>{movie.slug}</h3>
+                      <p>{movie.category}</p>
+                    </div>
+                    <Link href='/'>{movie.downloadlink['480p']}</Link>
+                    <div>
+                      <FcRating/> {movie.rating}
+                    </div>
+                    <div className="flex gap-2 mt-2">
+                      <Link href={`/movie/edit/${movie._id}`}><button>Update movie</button></Link>
+                      <Link href={`/movie/delete/${movie._id}`}><button>Delete movie</button></Link>
                     </div>
                   </div>
                 </div>
               })}
             </>}
+            <Link href='/movie' className="loadmorehomebtn w-100 flex flex-center mt-2"><button>Load more</button></Link>
           </div>
         </div>)}
     </>
