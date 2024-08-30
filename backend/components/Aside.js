@@ -38,7 +38,7 @@ export default function Aside() {
         </div>
         <ul className="mt-2">
             <Link href="/" className={activeLink === '/' ? 'active' : ''} onClick={() => handleClick('/')}><li><div><IoHomeSharp/></div>Dashboard</li></Link>
-            <Link href="/movie" className={activeLink === '/movie' ? 'active' : ''} onClick={() => handleClick('/movie')}><li><div><BiSolidCameraMovie/></div>Movies</li></Link>
+            <Link href="/movies" className={activeLink === '/movies' ? 'active' : ''} onClick={() => handleClick('/movies')}><li><div><BiSolidCameraMovie/></div>Movies</li></Link>
             <Link href="/addmovie" className={activeLink === '/addmovie' ? 'active' : ''} onClick={() => handleClick('/addmovie')}><li><div><MdOutlinePlaylistAdd/></div>Add</li></Link>
             <Link href="/draft" className={activeLink === '/draft' ? 'active' : ''} onClick={() => handleClick('/draft')}><li><div><RiDraftFill/></div>Draft</li></Link>
         </ul>
