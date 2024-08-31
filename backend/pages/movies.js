@@ -46,7 +46,7 @@ export default function movies() {
   // nearest integer using Math.ceil
     const pageNumbers = [];
 
-    for (let i = 0; i <= Math.ceil(allMovie / perPage); i++) {
+    for (let i = 1; i <= Math.ceil(allMovie / perPage); i++) {
         pageNumbers.push(i);
         
     }
@@ -82,12 +82,15 @@ export default function movies() {
                     })}
                 </>}
 
-                {publishedMovies.legnth === 0 ? (
+                {publishedMovies.length === 0 ? (
                     ""
                 ): (
                     <div className="blogpagination">
-                        <button>Previous</button>
-                        <button>Next</button>
+                        <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                        {pageNumbers.slice(Math.max(currentPage - 3, 0), Math.min(currentPage + 2, pageNumbers.length)).map(number => (
+                            <button key={number} onClick={() => paginate(number)} className={`${currentPage === number ? 'active' : ''}`}>{number}</button>
+                        ))}
+                        <button onClick={() => paginate(currentPage + 1)} disabled={currentMovies.length < perPage}>Next</button>
                     </div>
                 )}
             </div>
