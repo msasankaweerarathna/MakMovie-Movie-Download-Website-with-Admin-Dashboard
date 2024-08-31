@@ -45,7 +45,7 @@ export default function Aside() {
         <h3 className="mt-2">Account Pages</h3>
         <ul className="mt-2">
             <Link href="/profile" className={activeLink === '/profile' ? 'active' : ''} onClick={() => handleClick('/profile')}><li><div><FaUser/></div>Profile</li></Link>
-            <Link href="/auth" className={activeLink === '/auth' ? 'active' : ''} onClick={() => handleClick('/auth')}><li><div><PiSignInBold/></div>SignIn</li></Link>
+            <Link href="/auth" className={activeLink === '/auth' ? 'active' : ''} onClick={() => handleClick('/auth')}><li><div><PiSignInBold/></div>Sign In</li></Link>
         </ul>
     </div>
 
