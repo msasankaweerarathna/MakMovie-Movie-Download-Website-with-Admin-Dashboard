@@ -3,29 +3,53 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function Movie({ _id }) {
+export default function Movie(
+  { 
+    _id,
+    title: existingtitle,
+    slug: existingslug,
+    bgposter: existingbgposter,
+    smposter: existingsmposter,
+    titlecategory: existingtitlecategory,
+    description: existingdescription,
+    rating: existingrating,
+    duration: existingduration,
+    year: existingyear,
+    genre: existinggenre,
+    language: existinglanguage,
+    subtitle: existingsubtitle,
+    size: existingsize,
+    quality: existingquality,
+    youtubelink: existingyoutubelink,
+    category: existingcategory,
+    watchonline: existingwatchonline,
+    downloadlink: existingdownloadlink,
+    status: existingstatus,
+  }
+) {
+
   const [redirect, setRedirect] = useState(false);
 
   const router = useRouter();
 
-  const [title, setTitle] = useState("");
-  const [slug, setSlug] = useState("");
-  const [bgposter, setBgposter] = useState("");
-  const [smposter, setSmposter] = useState("");
-  const [titlecategory, setTitlecategory] = useState("");
-  const [description, setDescription] = useState("");
-  const [rating, setRating] = useState("");
-  const [duration, setDuration] = useState("");
-  const [year, setYear] = useState("");
-  const [genre, setGenre] = useState([]);
-  const [language, setLanguage] = useState("");
-  const [subtitle, setSubtitle] = useState("");
-  const [size, setSize] = useState("");
-  const [quality, setQuality] = useState("");
-  const [youtubelink, setYoutubelink] = useState("");
-  const [category, setCategory] = useState("");
-  const [watchonline, setWatchonline] = useState("");
-  const [downloadlink, setDownloadlink] = useState({
+  const [title, setTitle] = useState(existingtitle || "");
+  const [slug, setSlug] = useState(existingslug || "");
+  const [bgposter, setBgposter] = useState(existingbgposter || "");
+  const [smposter, setSmposter] = useState(existingsmposter || "");
+  const [titlecategory, setTitlecategory] = useState(existingtitlecategory || "");
+  const [description, setDescription] = useState(existingdescription || "");
+  const [rating, setRating] = useState(existingrating || "");
+  const [duration, setDuration] = useState(existingduration || "");
+  const [year, setYear] = useState(existingyear || "");
+  const [genre, setGenre] = useState(existinggenre || []);
+  const [language, setLanguage] = useState(existinglanguage || "");
+  const [subtitle, setSubtitle] = useState(existingsubtitle || "");
+  const [size, setSize] = useState(existingsize || "");
+  const [quality, setQuality] = useState(existingquality || "");
+  const [youtubelink, setYoutubelink] = useState(existingyoutubelink || "");
+  const [category, setCategory] = useState(existingcategory || "");
+  const [watchonline, setWatchonline] = useState(existingwatchonline || "");
+  const [downloadlink, setDownloadlink] = useState(existingdownloadlink || {
     "480p": "",
     "720p": "",
     "1080p": "",
@@ -38,7 +62,7 @@ export default function Movie({ _id }) {
     "1080p": false,
     "4K": false,
   });
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(existingstatus || "");
 
   //function for create movie
   async function createMovie(ev) {
