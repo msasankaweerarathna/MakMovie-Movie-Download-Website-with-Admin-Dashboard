@@ -60,7 +60,7 @@ export default async function handle(req, res) {
   //when get req
   if (method === 'GET') {
     if (req.query?.id) {
-      res.json(await Movie.findByID(req.query.id))
+      res.json(await Movie.findById(req.query.id))
     } else {
       res.json((await Movie.find()).reverse())
     }
