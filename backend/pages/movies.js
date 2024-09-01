@@ -74,8 +74,8 @@ export default function movies() {
                             <FcRating/> {movie.rating}
                           </div>
                           <div className="flex gap-2 mt-2">
-                            <Link href={`/movie/edit/${movie._id}`}><button>Update movie</button></Link>
-                            <Link href={`/movie/delete/${movie._id}`}><button>Delete movie</button></Link>
+                            <Link href={`/movies/edit/${movie._id}`}><button>Update movie</button></Link>
+                            <Link href={`/movies/delete/${movie._id}`}><button>Delete movie</button></Link>
                           </div>
                         </div>
                       </div>
