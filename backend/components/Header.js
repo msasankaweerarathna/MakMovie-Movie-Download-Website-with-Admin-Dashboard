@@ -1,6 +1,8 @@
 import useFectchData from "@/hooks/useFetchData";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 import { PiWindowsLogoBold } from "react-icons/pi";
 import { VscThreeBars } from "react-icons/vsc";
 import { IoLanguage, IoNotificationsSharp } from "react-icons/io5";
@@ -9,6 +11,10 @@ import { IoMdClose } from "react-icons/io";
 
 
 export default function Header() {
+
+  const { data: session } = useSession();
+
+
   //  Fetch api
   const { alldata, loading } = useFectchData("/api/getmovies");
 
@@ -35,14 +41,15 @@ export default function Header() {
           <div className="headerbar">
             <VscThreeBars />
           </div>
-          <div className="searchheaderinput">
+          {session ? <div className="searchheaderinput">
             <input
               type="text"
               placeholder="Search movie here"
               value={searchQuery}
               onClick={handleOpen}
             />
-          </div>
+          </div> : null}
+          
           <ul className="flex gap-2">
             <Link href='/'><li><PiWindowsLogoBold/></li></Link>
             <Link href='/'><li><IoLanguage/></li></Link>
