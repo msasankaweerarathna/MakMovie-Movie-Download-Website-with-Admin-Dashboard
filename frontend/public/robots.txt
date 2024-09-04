@@ -1,0 +1,21 @@
+# Block all crawlers for /accounts
+User-agent: *
+Disallow: /accounts
+Disallow: /private/
+Disallow: /search/
+Disallow: /search/label/
+Disallow: /500
+Disallow: /404
+Disallow: /2022/
+Disallow: /2022/12/
+Disallow: /2023/
+Disallow: /2023/01/
+Disallow: /2023/02/
+Disallow: /2023/03/
+Disallow: /2023/04/
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+Sitemap: https://makmovies.in/sitemap.xml
