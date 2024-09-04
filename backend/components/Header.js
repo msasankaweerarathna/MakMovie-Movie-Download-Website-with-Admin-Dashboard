@@ -14,7 +14,6 @@ export default function Header() {
 
   const { data: session } = useSession();
 
-
   //  Fetch api
   const { alldata, loading } = useFectchData("/api/getmovies");
 
