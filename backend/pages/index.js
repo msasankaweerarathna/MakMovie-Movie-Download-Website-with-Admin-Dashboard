@@ -14,23 +14,24 @@ import { RiDraftLine } from "react-icons/ri";
 import { FcRating } from "react-icons/fc";
 
 export default function Home() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  if (status === "loading") {
-    return <Loading />;
-  }
-
-  // Chack if there's no active session and redirect to login page
-  if (!session) {
-    router.push("/auth");
-    return null; // return null or any loading indicator while redirecting
-  }
 
   const { alldata, loading } = useFectchData("/api/getmovies");
 
   const publishedMovies = alldata.filter((ab) => ab.status === "publish");
   const draftMovies = alldata.filter((ab) => ab.status === "draft");
+
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  if (status === "loading") {
+    return <Loading />
+  }
+
+  // Chack if there's no active session and redirect to login page
+  if (!session) {
+    router.push('/auth');
+    return null; // return null or any loading indicator while redirecting
+  }
 
   if (session) {
     return (
