@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { MdOutlineAccountCircle } from "react-icons/md";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react"
 import Loading from "@/components/Loading";
 import { useRouter } from "next/router"; 
 
