@@ -12,12 +12,12 @@ export default function draft() {
   const router = useRouter();
 
   if (status === "loading") {
-    return <Loading />;
+    return <Loading />
   }
 
   // Chack if there's no active session and redirect to login page
   if (!session) {
-    router.push("/auth");
+    router.push('/auth');
     return null; // return null or any loading indicator while redirecting
   }
 
