@@ -15,7 +15,7 @@ export default async function handle(req, res){
             const movies = await Movie.findByID(req.query.id);
             res.json(movies);
         }else if (req.query?.title) {
-            // fetch movies by title for search funvtion
+            // fetch movies by title for search function
             const title = await Movie.find({title: req.query.title});
             res.json(title);
         }else if (req.query?.titlecategory) {
@@ -26,6 +26,18 @@ export default async function handle(req, res){
             //fect movie by genre
             const genre = await Movie.find({genre: req.query.genre});
             res.json(genre.reverse()); // reverse for showing latest data
+        } else if (req.query?.category) {
+            //fetch movie by category
+            const category = await Movie.find({category: req.query.category});
+            res.json(category.reverse()); // reverse for showing latest data
+        } else if (req.query?.slug) {
+            //fetch movie by slug(url of the movie)
+            const slug = await Movie.find({slug: req.query.slug});
+            res.json(slug.reverse); // reverse for showing latest data
+        } else {
+            //fetch all movies
+            const movies = await Movie.find();
+            res.json(movies.reverse()); // reverse for showing latest data
         }
     } else {
         res.status(405).json({massage: "Method Not Allowed"})
