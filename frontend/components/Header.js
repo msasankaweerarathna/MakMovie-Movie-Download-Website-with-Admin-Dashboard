@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { IoClose } from "react-icons/io5";
 import { BiSearch } from "react-icons/bi";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaStar } from "react-icons/fa";
 import useFectchData from "@/hooks/useFetchData";
 
 export default function Header() {
@@ -53,9 +53,13 @@ export default function Header() {
         setSearchResult(filteredMovies);
     }, [movieshortname]);
 
+    const handleMovieClick = () =>{
+        setMovieshortname('');
+    }
+
     const searchRef = useRef(null);
 
-    // function for when clcike outside of the search bar will be close
+    // function for when clcik outside of the search bar will be close
     const handleClickOutside = (event) => {
         if (searchRef.current && !searchRef.current.contains(event.target)) {
             setMovieshortname('');
@@ -114,6 +118,32 @@ export default function Header() {
             <input type="text" placeholder="Search Movies..." value={movieshortname} onChange={(e) => setMovieshortname(e.target.value)} />
 
             <div className="searchclose" onClick={handleSearchbarClose}><IoClose /></div>
+            {movieshortname && (
+                <div className="search_results">
+                    <h2>---:Search Result:---</h2>
+                    <ul>
+                        {searchResult.length > 0 ? (
+                           // showing 20 search results by matching words
+                           searchResult.slice(0, 20).map((movie) => (
+                            <Link onClick={handleMovieClick} key={movie._id} href={`/movies/${movie.slug}`}>
+                                <div className="moviesearchlist">
+                                    <div>
+                                        <img src={movie.smposter} width={80} height={110} alt="image" />
+                                    </div>
+                                    <div className="searchbarinfo">
+                                        <h5>{movie.title}</h5>
+                                        <h4>Rating: <FaStar/><span>{movie.rating}</span></h4>
+                                        <h4>Release Year: {movie.year}</h4>
+                                    </div>
+                                </div>
+                            </Link>
+                           ))
+                        ): (
+                            <p>No Movie Found</p>
+                        )}
+                    </ul>
+                </div>
+            )}
         </form>
 
         <div id={navbar ? "navbaractive" : "navbar"}>
