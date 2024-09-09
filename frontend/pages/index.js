@@ -10,7 +10,10 @@ import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import Loader from "@/components/Loader";
 import Link from "next/link";
 import { FaAngleDoubleUp, FaCheck, FaDownload, FaEye, FaFilm, FaHeart, FaPhotoVideo, FaPlus, FaStar } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { FaClapperboard } from "react-icons/fa6";
+import genres from "./genre/[genre]";
+import category from "./genre";
 
 
 export default function Home() {
@@ -24,7 +27,25 @@ export default function Home() {
   const publishedData = alldata.filter(ab => ab.status === "publish");
 
   // function for filter by genre 
-  const [selectedGenre, setSelectGenre] = useState('All Movies');
+  const [selectedGenre, setSelectGenre] = useState('all movies');
+
+  const genres = ['all movies', 'action', 'adventure', 'animation', 'comedy', 'drama', 'crime', 'fantasy', 'horror', 'romance', 'thriller', 'science_fiction'];
+
+  const categories = ["bollywood", "hollywood", "south", "gujarati", "marvel_studio", "tv_Shows", "web_series"];
+
+  const handleGenreClick = (genre) => {
+    setSelectGenre(genre);
+  }
+
+  const filteredData = publishedData.filter(movie => {
+    if (selectedGenre === 'all movies') return true;
+    if (categories.includes(selectedGenre)) {
+      return movie.category === selectedGenre;
+    } else {
+      return movie.genre.includes(selectedGenre);
+    }
+      
+  })
 
   return (
 
@@ -174,7 +195,7 @@ export default function Home() {
                             <h5>{movie.title}</h5>
                             <h6>
                               <span>{movie.year}</span>
-                              <div className="rete">
+                              <div className="rate">
                                 <i className="cardfas">
                                   <FaHeart/>
                                 </i>
@@ -203,6 +224,64 @@ export default function Home() {
           <li><Link href='/series'><i><FaFilm className="fas"/></i>Series</Link></li>
           <li><Link href='/series'><i><FaCheck className="fas"/></i>Original Series</Link></li>
           <li><Link href='/genre'><i><FaClapperboard className="fas"/></i>Recentle Added</Link></li>
+        </div>
+
+        <div className="moviestegs">
+          {/* mapping over the genres array to generate buttons */}
+          {genres.slice(0, 16).map(genre => (
+            <button key={genre} className={selectedGenre === genre ? 'active' : ''} onClick={() => handleGenreClick(genre)}>
+              {genre}
+            </button>
+          ))}
+          {categories.map(category => (
+            <button key={category} className={selectedGenre === category ? 'active' : ''} onClick={() => handleGenreClick(category)}>
+            {category}
+          </button>
+          ))}
+        </div>
+
+        <div className="moviescontainer">
+          {loading ? <div className="scrollcardssec flex flex-center h-15vh"><Loader/></div> : <>
+            {filteredData.length === 0 ? <p className="nodatafound">No Movie Found</p> : <>
+              {filteredData.map((movie) => (
+                <div className="card" key={movie._id}>
+                  <Link href={`/movies/${movie.slug}`}>
+                          <div className="cardimg">
+                            <img src={movie.smposter} alt="movie" loading="lazy" />
+                          </div>
+                          <div className="contents">
+                            <h5>{movie.title}</h5>
+                            <h6>
+                              <span>{movie.year}</span>
+                              <div className="rate">
+                                <i className="cardfas">
+                                  <FaHeart/>
+                                </i>
+                                <i className="cardfas">
+                                  <FaEye/>
+                                </i>
+                                <i className="cardfas">
+                                  <FaStar/>
+                                </i>
+                                <h6>{movie.rating}</h6>
+                              </div>
+                            </h6>
+                          </div>
+                      </Link>
+                </div>
+              ))}   
+            </>}
+          </>}
+        </div>
+
+        <div className="nextpagelink">
+          <Link href='/all'>
+             <button className="cssbuttons_io_button">Next Page
+              <div className="icon">
+                <FaArrowRight/>
+              </div>
+             </button>
+          </Link>
         </div>
       </div>
 
