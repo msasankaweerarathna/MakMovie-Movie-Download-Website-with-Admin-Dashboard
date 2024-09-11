@@ -1892,48 +1892,6 @@ nav.sticky .mobile svg {
 
 /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   */
 /* *************************** Contact page   */
-.contactpage {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background: url('/img/contactbg.jpg') no-repeat center center/cover;
-    overflow: hidden;
-}
-
-.contactpage::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    opacity: 0.6;
-}
-
-.contactcard {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 430px;
-    height: 600px;
-    background-color: #fff;
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 0 50px #b7a5a597;
-}
-
-.contactdesign {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.topccard {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 0, 0, 0.678);
-    padding: 2rem;
-}
 
 .tcardsvg {
     display: flex;
@@ -1951,82 +1909,133 @@ nav.sticky .mobile svg {
     color: #fff;
 }
 
-.usercoderimg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.contactpage {
+    position: relative;
     width: 100%;
+    height: 100vh;
+    background: url('/img/contactbg.jpg') no-repeat center center/cover;
     overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.usercoderimg img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 7px solid #fff;
-}
-
-.usercoderinfo {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    color: #fff;
-}
-
-.usercoderinfo h1 {
-    font-size: 1.65rem;
-    font-weight: 600;
-}
-
-.usercoderinfo h3 {
-    font-size: 1.2rem;
-    margin-bottom: 35px;
-    font-weight: 400;
-}
-
-.usercodersvg {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.usercodersvg a {
-    color: #fff;
-}
-
-.usercodersvg svg {
-    font-size: 1.5rem;
-}
-
-.bottomcard {
+  }
+  
+  .contactpage::before {
+    content: '';
     position: absolute;
     width: 100%;
-    height: 180px;
-    bottom: 0;
-    background-color: #fff;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.6;
+  }
+  
+  .contactcard {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.8); 
     border-radius: 30px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-}
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); 
+  }
+  
+  .topccard {
+    width: 100%;
+    background-color: rgba(255, 0, 0, 0.5);
+    padding: 2rem;
+  }
 
-.bcardtext p {
+  .usercoderimg{
+    display: flex;
+  }
+  
+  .usercoderimg img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 7px solid rgba(255, 255, 255, 0.8);
+    margin: 20px auto;
+  }
+  
+  .usercoderinfo {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .usercoderinfo h1 {
+    font-size: 1.65rem;
+    font-weight: 600;
+  }
+  
+  .usercoderinfo h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .usercodersvg a {
+    color: #fff;
+    font-size: 1.5rem;
+  }
+  
+  .contactform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .contactform h2 {
+    margin-bottom: 20px;
+  }
+  
+.contactform input,
+.contactform textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid rgba(255, 255, 255, 0.7); 
+    background-color: rgba(255, 255, 255, 0.9); 
+    color: #333;
+    border-radius: 5px;
+}
+  
+  .contactform button {
+    padding: 10px 20px;
+    background-color: rgba(255, 107, 107, 0.8);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .contactform button:hover {
+    background-color: rgba(255, 107, 107, 1); 
+  }
+  
+  .success-message {
+    color: green;
+    margin-top: 10px;
+  }
+  
+  .bottomcard {
+    background-color: #fff;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .bottomcard p {
     font-size: 1.2rem;
     color: #777;
-    font-weight: 500;
-}
-
-.bcardtext svg {
+  }
+  
+  .bottomcard svg {
     font-size: 1.2rem;
     margin-top: 1rem;
     color: rgb(231, 68, 68);
-    animation: updownsvg 1.5s infinite;
-}
+  }
+  
 
 @keyframes updownsvg {
     0% {
